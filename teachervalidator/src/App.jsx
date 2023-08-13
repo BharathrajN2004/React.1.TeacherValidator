@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     const fetchUserData = async (email) => {
       try {
-
         // Get the user document based on the email
         const userDocRef = doc(firestore, 'users', email);
         const userDocSnap = await getDoc(userDocRef);
