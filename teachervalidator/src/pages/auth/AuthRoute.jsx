@@ -7,9 +7,9 @@ import SignUp from './Signup'
 function AuthRoute() {
   return (
     <Routes>
-        <Route exact path='/auth/login' element={<Login/>}/>
-        <Route exact path='/auth/signup' element={<SignUp/>}/>
-        <Route path='/auth' element={<Navigate to='/auth/login' replace/>}/>
+      <Route exact path='/auth/login' element={<Login />} />
+      <Route exact path='/auth/signup' element={<SignUp />} />
+      <Route path='/*' element={<Navigate to='/auth/login' replace />} />
     </Routes>
   )
 }

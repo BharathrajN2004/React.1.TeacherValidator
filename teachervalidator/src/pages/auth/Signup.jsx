@@ -48,7 +48,7 @@ export function SignUp() {
             createUser(email, password).then((success) => {
                 if (success) {
                     console.log(email, name, collegeId, access, 'CSE', password)
-                    addUser(email, name, collegeId, access, 'CSE', password).then((success) => success && navigate('/user/home'));
+                    addUser(email.toLowerCase(), name, collegeId, access, 'CSE', password).then((success) => success && navigate('/user/home'));
                 }
             }
             );

@@ -19,7 +19,7 @@ function App() {
         // Get the user document based on the email
         const userDocRef = doc(firestore, 'users', email);
         const userDocSnap = await getDoc(userDocRef);
-
+        console.log(userDocSnap.data(),email);
         if (userDocSnap.exists()) {
           // User document exists, retrieve the data
           const userData = userDocSnap.data();
@@ -41,18 +41,18 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is logged in, fetch user data
-        setUserDetail({'email':user.email})
+        setUserDetail({ 'email': user.email })
         fetchUserData(user.email);
       } else {
         // User is logged out, reset states
         setUserDetail(null);
+        setLoading(false);
       }
     });
 
-    // Cleanup the listener when component unmounts
-    return () => unsubscribe();
   }, []);
   console.log(userDetail)
+
 
   return (
     <>
