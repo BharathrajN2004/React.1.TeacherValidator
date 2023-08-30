@@ -12,6 +12,7 @@ import {
 } from "@material-tailwind/react";
 
 import { signIn } from "../../Firebase/auth";
+import background from "../../assets/background.jpeg";
 
 function Login() {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ function Login() {
     return (
         <>
             <img
-                src="https://th.bing.com/th/id/R.6231674972ee06b2adb10970455670b1?rik=kmeXEwK9voLRHA&riu=http%3a%2f%2fsairam.edu.in%2fwp-content%2fuploads%2f2018%2f06%2fbanner-1.jpg&ehk=LicAGsH%2f36T2d97UOzdfiCquYM1RfaGj0U87xcAZi3s%3d&risl=&pid=ImgRaw&r=0"
+                src={background}
                 className="absolute inset-0 z-0 h-full w-full object-fill"
             />
             <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />

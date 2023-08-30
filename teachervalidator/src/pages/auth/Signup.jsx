@@ -14,6 +14,7 @@ import {
 } from "@material-tailwind/react";
 import { createUser } from "../../Firebase/auth";
 import { addUser } from "../../Firebase/userAdd";
+import background from "../../assets/background.jpeg";
 
 export function SignUp() {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ export function SignUp() {
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
     let [access, setAccess] = useState('');
+    let [department, setDepartment] = useState('');
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -43,12 +45,17 @@ export function SignUp() {
         setAccess(event);
     };
 
+    const handleDepartment = (event) => {
+        setDepartment(event);
+    }
+
+
     const handleCreateUser = () => {
         if (email != '' && password != '') {
             createUser(email, password).then((success) => {
                 if (success) {
-                    console.log(email, name, collegeId, access, 'CSE', password)
-                    addUser(email.toLowerCase(), name, collegeId, access, 'CSE', password).then((success) => success && navigate('/user/home'));
+                    console.log(email, name, collegeId, access, department, password)
+                    addUser(email.toLowerCase(), name, collegeId, access, department, password).then((success) => success && navigate('/user/home'));
                 }
             }
             );
@@ -60,7 +67,7 @@ export function SignUp() {
     return (
         <>
             <img
-                src="https://th.bing.com/th/id/R.6231674972ee06b2adb10970455670b1?rik=kmeXEwK9voLRHA&riu=http%3a%2f%2fsairam.edu.in%2fwp-content%2fuploads%2f2018%2f06%2fbanner-1.jpg&ehk=LicAGsH%2f36T2d97UOzdfiCquYM1RfaGj0U87xcAZi3s%3d&risl=&pid=ImgRaw&r=0"
+                src={background}
                 className="absolute inset-0 z-0 h-full w-full object-fill"
             />
             <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />
@@ -82,11 +89,23 @@ export function SignUp() {
                         <Input type="password" label="Password" size="lg" value={password} onChange={handlePasswordChange} />
                         <div className="max-w-[25rem]">
                             <Select color="blue" label="Select Access Level" value={access} onChange={handleAccessChange} >
-                                <Option value="Principal">Principal</Option>
                                 <Option value="HOD">HOD</Option>
                                 <Option value="Staff">Staff</Option>
                             </Select>
                         </div>
+                        <div className="max-w-[25rem]">
+                            <Select color="blue" label="Select Department" value={department} onChange={handleDepartment} >
+                                <Option value="CSE">CSE</Option>
+                                <Option value="CCE">CCE</Option>
+                                <Option value="IT">IT</Option>
+                                <Option value="AI&DS">AI&DS</Option>
+                                <Option value="MECH">MECH</Option>
+                                <Option value="EEE">EEE</Option>
+                                <Option value="ECE">ECE</Option>
+                                <Option value="CYBER">CYBER</Option>
+                            </Select>
+                        </div>
+
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button variant="gradient" fullWidth onClick={handleCreateUser}>

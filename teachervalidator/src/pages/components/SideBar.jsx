@@ -20,7 +20,6 @@ import {
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 function SideBar({ access }) {
-    console.log(access)
     const [open, setOpen] = React.useState(0);
 
     const handleOpen = (value) => {
@@ -37,16 +36,18 @@ function SideBar({ access }) {
                 </Link>
             </div>
             <List >
-                <Link to="/user/home">
-                    <ListItem className="max-w-[12rem]">
-                        <ListItemPrefix>
-                            <PresentationChartBarIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        <Typography color="blue-gray" className="mr-auto font-normal">
-                            Home
-                        </Typography>
-                    </ListItem>
-                </Link>
+                {access != "Principal" &&
+                    <Link to="/user/home">
+                        <ListItem className="max-w-[12rem]">
+                            <ListItemPrefix>
+                                <PresentationChartBarIcon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            <Typography color="blue-gray" className="mr-auto font-normal">
+                                Home
+                            </Typography>
+                        </ListItem>
+                    </Link>
+                }
                 {access != 'Principal' && <Link to="/user/leaveRequest">
                     <ListItem className="max-w-[12rem]">
                         <ListItemPrefix>
@@ -121,6 +122,14 @@ function SideBar({ access }) {
                                     Permission
                                 </ListItem>
                             </Link>
+                            <Link to='/user/leaveEntry' state='Vacation Leave' >
+                                <ListItem>
+                                    <ListItemPrefix>
+                                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                                    </ListItemPrefix>
+                                    Vacation Leave
+                                </ListItem>
+                            </Link>
                         </List>
                     </AccordionBody>
                 </Accordion>}
@@ -132,9 +141,6 @@ function SideBar({ access }) {
                             <InboxIcon className="h-5 w-5" />
                         </ListItemPrefix>
                         Inbox
-                        <ListItemSuffix>
-                            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                        </ListItemSuffix>
                     </ListItem>
                 </Link>
                 }

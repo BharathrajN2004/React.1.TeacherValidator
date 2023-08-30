@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
     Navbar,
     Typography,
@@ -11,11 +11,12 @@ import {
     BellIcon,
 } from "@heroicons/react/24/solid";
 
+import { authProvider } from "../../Providers/AuthProvider";
 import { userSignOut } from "../../Firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Notification from "./helper/Notification";
 
-function NavBar({ userDetail }) {
+function NavBar() {
+    const { userDetail, loading } = useContext(authProvider);
     const [currentTime, setCurrentTime] = useState(new Date());
     const navigate = useNavigate();
     const handleUserSignOut = () => {
@@ -45,7 +46,7 @@ function NavBar({ userDetail }) {
                         color="blue-gray"
                         className="opacity-0 font-normal lg:opacity-50 ml-2"
                     >
-                        {userDetail.access + " of " + userDetail.department + " department"}
+                        {userDetail.access + " of " + userDetail.department + (userDetail.access == "Principal" ? "" : " department")}
                     </Typography>
                 </div>
 
@@ -57,14 +58,6 @@ function NavBar({ userDetail }) {
                     >
                         {currentTime.toDateString()}
                     </Typography>
-                    <Menu>
-                        <MenuHandler>
-                            <IconButton variant="text" color="blue-gray" className="mr-4">
-                                <BellIcon className="h-5 w-5 text-blue-gray-500" />
-                            </IconButton>
-                        </MenuHandler>
-                        <Notification/>
-                    </Menu>
                     <Button onClick={handleUserSignOut}>SignOut</Button>
                 </div>
             </div>
