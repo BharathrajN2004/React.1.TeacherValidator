@@ -78,7 +78,7 @@ function ViewOthersData() {
 
         pdf.text('Leave Data PDF', 10, 10);
         pdf.setFontSize(12);
-        const columns = data.length === 3 ? ["LeaveType", "Date", "Reason"] : ["Date", "Reason"];
+        const columns = viewAll ? ["LeaveType", "Date", "Reason"] : ["Date", "Reason"];
 
         pdf.autoTable({
             head: [columns],
@@ -90,7 +90,7 @@ function ViewOthersData() {
     };
 
     function generateExcel(data, name) {
-        const ws = XLSX.utils.aoa_to_sheet([data.length === 3 ? ["LeaveType", "Date", "Reason"] : ["Date", "Reason"], ...data]);
+        const ws = XLSX.utils.aoa_to_sheet([viewAll ? ["LeaveType", "Date", "Reason"] : ["Date", "Reason"], ...data]);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
         XLSX.writeFile(wb, name + "_leave_Data.xlsx", { bookType: 'xlsx' });

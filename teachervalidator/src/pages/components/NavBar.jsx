@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import {
     Navbar,
     Typography,
@@ -16,7 +17,7 @@ import { userSignOut } from "../../Firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-    const { userDetail, loading } = useContext(authProvider);
+    const { userDetail } = useSelector(state => state.auth);
     const [currentTime, setCurrentTime] = useState(new Date());
     const navigate = useNavigate();
     const handleUserSignOut = () => {

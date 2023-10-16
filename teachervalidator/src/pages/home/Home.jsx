@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { doc, onSnapshot } from 'firebase/firestore';
 
 import { authProvider } from "../../Providers/AuthProvider";
@@ -9,7 +10,7 @@ import StatisticsCard from "../components/StaticCard";
 import { MembersTable } from "../components/Table";
 
 function Home() {
-    const { userDetail } = useContext(authProvider);
+    const { userDetail } = useSelector(state => state.auth);
 
     const [activeTab, setActiveTab] = useState("CasualLeave");
 

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { authProvider } from "../Providers/AuthProvider";
@@ -11,7 +12,7 @@ import LeaveRequest from './home/LeaveRequest'
 import ViewOthersData from './home/ViewOthersData'
 
 function Routing() {
-    const { userDetail } = useContext(authProvider);
+    const { userDetail } = useSelector(state => state.auth);
 
     return (
         <div className="min-h-screen max-w-full bg-blue-gray-50/50">
